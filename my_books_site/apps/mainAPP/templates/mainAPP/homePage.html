@@ -1,0 +1,9 @@
+{% extends 'mainAPP/base.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="btn btn-success">Save city</button>
+  </form>
+{% endblock %}
