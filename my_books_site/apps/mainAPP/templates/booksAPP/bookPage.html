@@ -1,0 +1,51 @@
+{% extends 'booksAPP/base.html' %}
+
+
+{% block title %}
+    Book
+{% endblock %}
+
+
+{% block book_name %}
+  some book name
+{% endblock %}
+
+
+{% block script %}
+    function other(){
+        document.write ('<table width="50%" border="1">');
+    for (i=1; i<6; i++) {
+      document.writeln("<tr>");
+      for (j=1; j<6; j++) document.write("<td>" + i + j + "<\/td>");
+      document.writeln("<\/tr>");
+    }
+    document.write ("<\/table> ");
+    }
+
+    function backToMain()
+      {
+        open('http://localhost:8000');
+      }
+
+{% endblock %}
+
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form }}
+      <p>
+      {% if books_list %}
+        {% for a in books_list %}
+            <a href="{% url 'booksAPP:detail' a.bookID %}">{{a.name}}</a><br>
+        {% endfor %}
+      {% else %}
+      No books
+      {% endif %}
+          <p1>
+              <button type="submit" class="btn btn-success">Sure</button><br>
+              <button type="button" onclick="backToMain()">Back to main page</button><br>
+          </p1>
+      </p>
+  </form>
+{% endblock %}

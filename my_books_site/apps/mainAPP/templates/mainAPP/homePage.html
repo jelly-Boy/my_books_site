@@ -1,9 +1,13 @@
 {% extends 'mainAPP/base.html' %}
 
+{% block title %}
+  Main page
+{% endblock %}
 {% block content %}
   <form method="post">
     {% csrf_token %}
     {{ form }}
-    <button type="submit" class="btn btn-success">Save city</button>
+    <p> <a href="http://localhost:8000/books/"> Press to go to book page</a> </p>
+    <button type="submit" class="btn btn-success">OK</button>
   </form>
 {% endblock %}

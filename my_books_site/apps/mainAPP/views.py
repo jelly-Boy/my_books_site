@@ -2,9 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import CreateView
 from .models import city
-class city_create_view (CreateView):
-    model = city
-    fields = ('name', 'country')
+
 
 
 def index(request):
