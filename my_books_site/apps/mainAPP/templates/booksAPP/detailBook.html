@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Book: {{book.name}}
+{% endblock %}}
+
+{%block content %}
+    <div class="container" style="max-width: 1300px; margin-top: 30px; margin-left: auto; margin-right: auto; background-color: #dae6f7;">
+        <div class="row justify-content-center">
+        <div class="col-8">
+          <h1 class="mt-2">{{book.name}}</h1>
+          <hr class="mt-0 mb-4">
+          <form method="post">
+            {% csrf_token %}
+            {{ form }}
+              <img src="{{book.image.url}}" height="400" width="300">
+             <p>
+                 Info: {{book.info_about_book}}<br>
+                 Author: {{book.authorID}}<br>
+                 Genre: {{book.genreID}}<br>
+                 Publication date: {{book.pub_date}}<br>
+             </p>
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}

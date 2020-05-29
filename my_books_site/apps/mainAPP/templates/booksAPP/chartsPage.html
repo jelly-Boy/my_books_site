@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"></script>
+
+{% endblock %}
+
+
+{% block title %}
+    Charts
+{% endblock %}
+
+{% block style %}
+body {
+        background-image: url(http://www.allwhitebackground.com/images/6/Book-Background-Picture.jpg);
+        background-repeat: no-repeat;
+        color: #5d5b61;
+        background-size: cover;
+        background-attachment: scroll;
+    }
+{% endblock %}
+
+{%  block content %}
+<div class="container-fluid">
+    <div class="container" style="width: 800px;height: 800px; margin-top:40px; margin-bottom: 10px">
+      <canvas id="myChart" style="width:400px;height: 400px; background-color: #FFFFFF;"></canvas>
+        <script>
+    var ctx = document.getElementById('myChart');
+    let g_list=[];
+    let n_list=[];
+    {%  for g in genres %}
+       g_list.push('{{ g.name }}');
+    {% endfor %}
+    {%  for n in num %}
+       n_list.push('{{ n }}');
+    {% endfor %}
+
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: g_list,
+            datasets: [{
+                label: 'Books by genres',
+                data: n_list,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    </div>
+    <div class="container" style="width: 800px;height: 800px; margin-top: 20px">
+        <canvas id="mySecondChart" style="width:400px;height: 400px;background-color: #FFFFFF;"></canvas>
+            <script>
+    var ctx = document.getElementById('mySecondChart');
+    let ge_list=[];
+    let nu_list=[];
+    {%  for g in genres %}
+       ge_list.push('{{ g.name }}');
+    {% endfor %}
+    {%  for n in num %}
+       nu_list.push('{{ n }}');
+    {% endfor %}
+
+    var myChart = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+            labels: ge_list,
+            datasets: [{
+                label: 'Books by genres',
+                data: nu_list,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    </div>
+    <a href="{% url 'booksAPP:export_books_data' %}" type="button" class="btn btn" style="background-color: #ebdb6b;margin-right: 500px;margin-left: 500px;margin-top: 50px;width: 500px;">Download stats in *.xls* file</a>
+</div>
+{% endblock %}

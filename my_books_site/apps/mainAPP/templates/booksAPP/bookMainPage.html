@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Book List {% endblock %}
+
+{% block style %}
+body{
+background-image: url(https://media.wired.com/photos/5be4cd03db23f3775e466767/125:94/w_2375,h_1786,c_limit/books-521812297.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+color: #5d5b61;
+background-attachment: scroll;
+}
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {%csrf_token %}
+    {{ form }}
+    <div class="row  row-cols-md-4" style="width: auto ;margin: 3rem auto 8rem;">
+    {% if books_list %}
+    {% for a in books_list %}
+    <div class="card bg-white text-dark border-dark" style="margin: 1rem 0.8rem 2rem; max-width: 340px">
+        <img src="{{a.image.url}}" alt="Here can be your photo" class="card-img-top" width="200" height="300">
+        <div class="card-body">
+            <h1 class="card-header bg-light text-dark ">{{a.name}}</h1>
+            <h2 class="card-subtitle mb-2 text-muted">{{a.authorID}}</h2>
+            <h6 class="card-text text-dark"
+                style="white-space: nowrap; overflow: hidden;padding:10px;text-overflow: ellipsis;"> 
+                {{a.info_about_book}}
+            </h6>
+            <a href="{% url 'booksAPP:detailBook' a.bookID %}" class="btn btn-outline-primary">More</a>
+            <a href="#" class="btn btn-outline-info">IDK</a>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    No books
+    {% endif %}
+
+</form>
+{% endblock %}
